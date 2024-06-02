@@ -17,15 +17,15 @@ export default function Home() {
         and  <span className='text-green-600'>Designs</span>
       </h1>
       <p className="mt-8 text-lg max-w-prose text-center text-balance md:text-wrap">
-        Share your innovative designs and full stack projects with the world.{' '}
-        <span className="font-semibold">Showcase</span> your talent and get noticed by top companies.
+        Share your innovative designs and projects with the world.{' '}
+        <span className="font-semibold">Showcase</span> your talent with us.
       </p>
 
       <ul className="mt-8 space-y-2 text-left font-medium flex flex-col items-center sm:items-center">
         <div className="space-y-2">
           <li className="flex gap-1.5 items-center text-left">
             <Check className="h-5 w-5 shrink-0 text-yellow-400" />
-            Showcase your work with other developers and UI/UX designers
+            Showcase your work with other developers and designers
           </li>
           <li className="flex gap-1.5 items-center text-left">
             <Check className="h-5 w-5 shrink-0 text-yellow-400" />
