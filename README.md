@@ -25,7 +25,18 @@ Install the required dependencies:
 ```
 npm install
 ```
+### Create .env file
 
+```
+GOOGLE_CLIENT_ID=
+GOOGLE_CLIENT_SECRET=
+MONGODB_URI=
+CLOUDINARY_CLOUD_NAME=
+CLOUDINARY_API_KEY= 
+CLOUDINARY_API_SECRET=
+NEXTAUTH_SECRET=
+
+```
 ### Start the project
 
 ```
@@ -38,3 +49,10 @@ npm run dev
 ![Design2Code](https://github.com/Dheerajjha451/Design2Code/assets/106474979/f0c1a90d-aeff-480d-ac36-d10234b0ac25)
 
 
+# Contributing
+
+Check out the [contributing guidelines](https://github.com/Dheerajjha451/Design2Code/blob/main/CONTRIBUTING.md)
+
+# License
+
+This project is licensed under the [License.](https://github.com/Dheerajjha451/Design2Code/blob/main/LICENSE)
