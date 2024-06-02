@@ -1,5 +1,3 @@
-// data.js
-
 export const webFrameworkNames = [
   'Next.js',
   'React',
@@ -13,6 +11,7 @@ export const webFrameworkNames = [
 ];
 
 export const cssPackages = [
+  'CSS',
   'Bootstrap',
   'Tailwind CSS',
   'Material-UI',
@@ -21,10 +20,9 @@ export const cssPackages = [
   'Foundation',
   'Ant Design',
   'UIKit',
-  'Pure CSS',
   'Skeleton',
-  'Milligram',
-  'Styled Components'
+  'Styled Components',
+  'Others'
 ];
 
 export const useCases = [
