@@ -4,7 +4,7 @@ import { Code, SquareDashedBottomCode } from 'lucide-react'
 import { Button } from './ui/button'
 import { useSession } from 'next-auth/react'
 import { Avatar, AvatarImage } from './ui/avatar'
-import { Menu, X } from 'lucide-react' // Icons for the menu toggle
+import { Menu, X } from 'lucide-react' 
 
 const Header = () => {
   const { data: session } = useSession()
