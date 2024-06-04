@@ -11,7 +11,6 @@ import { useSession } from 'next-auth/react';
 import { useRouter } from 'next/router';
 import Spinner from '../Spinner';
 import { ReactSortable } from 'react-sortablejs';
-import imageCompression from 'browser-image-compression';
 
 const ReactQuill = dynamic(() => import('react-quill'), { ssr: false });
 
@@ -53,12 +52,11 @@ const TemplateForm = ({
   const [css, setCss] = useState(existingCss || '');
   const [useCase, setUseCase] = useState(existingUseCase || '');
   const [isUploading, setIsUploading] = useState(false);
-  const [errors, setErrors] = useState({});
+  const [descriptionError, setDescriptionError] = useState('');
 
   const { data: session } = useSession();
   const [redirect, setRedirect] = useState(false);
   const router = useRouter();
-
   const uploadImageQueue = [];
 
   function updateImagesOrder(images) {
@@ -71,59 +69,32 @@ const TemplateForm = ({
     setImages(updatedImages);
   }
 
-  async function compressAndUploadImage(file) {
-    const options = {
-      maxSizeMB: 1,
-      maxWidthOrHeight: 1920,
-      useWebWorker: true
-    };
-
-    try {
-      const compressedFile = await imageCompression(file, options);
-      const data = new FormData();
-      data.append('file', compressedFile);
-
-      const response = await axios.post('/api/upload', data);
-      return response.data.links;
-    } catch (error) {
-      console.error('Error uploading image:', error);
-      return [];
-    }
-  }
-
   async function uploadImages(ev) {
-    const files = Array.from(ev.target.files);
+    const files = ev.target?.files;
     if (files.length > 0) {
       setIsUploading(true);
 
-      const uploadPromises = files.map(file => compressAndUploadImage(file));
-      const links = await Promise.all(uploadPromises);
+      for (const file of files) {
+        const data = new FormData();
+        data.append('file', file);
 
-      setImages(oldImages => [...oldImages, ...links.flat()]);
+        uploadImageQueue.push(
+          axios.post('/api/upload', data).then(res => {
+            setImages(oldImages => [...oldImages, ...res.data.links]);
+          })
+        );
+      }
+
+      await Promise.all(uploadImageQueue);
       setIsUploading(false);
     }
-  }
-
-  function validateForm() {
-    const newErrors = {};
-    if (!title) newErrors.title = 'Title is required';
-    if (!description) newErrors.description = 'Description is required';
-    if (!framework) newErrors.framework = 'Framework is required';
-    if (!css) newErrors.css = 'CSS is required';
-    if (!useCase) newErrors.useCase = 'Use Case is required';
-    if (!deployedLink) newErrors.deployedLink = 'Link is required';
-    if (!repositoryLink) newErrors.repositoryLink = 'Link is required';
-
-
-    setErrors(newErrors);
-
-    return Object.keys(newErrors).length === 0;
   }
 
   async function createTemplate(ev) {
     ev.preventDefault();
 
-    if (!validateForm()) {
+    if (description.trim() === '') {
+      setDescriptionError('Description is required.');
       return;
     }
 
@@ -158,14 +129,11 @@ const TemplateForm = ({
   }
 
   return (
-    <form className="p-3 space-y-6" onSubmit={createTemplate}>
-      <div>
-        <Input type='text' placeholder='Template Name' value={title} onChange={(e) => setTitle(e.target.value)} />
-        {errors.title && <p className="text-red-600">{errors.title}</p>}
-      </div>
-      <div className="grid grid-cols-3 gap-4">
-        <div>
-          <select className='border rounded-md px-3 py-2 w-full' value={framework} onChange={(e) => setFramework(e.target.value)}>
+    <>
+      <form className="p-3 space-y-6" onSubmit={createTemplate}>
+        <Input type='text' placeholder='Template Name' value={title} onChange={(e) => setTitle(e.target.value)} required />
+        <div className="grid grid-cols-3 gap-4">
+          <select className='border rounded-md px-3 py-2 w-full' value={framework} onChange={(e) => setFramework(e.target.value)} required>
             <option value="">Select A Framework</option>
             {webFrameworkNames.map((framework) => (
               <option key={framework} value={framework}>
@@ -173,81 +141,81 @@ const TemplateForm = ({
               </option>
             ))}
           </select>
-          {errors.framework && <p className="text-red-600">{errors.framework}</p>}
-        </div>
-        <div>
-          <select className='border rounded-md px-3 py-2 w-full' value={css} onChange={(e) => setCss(e.target.value)}>
-            <option value="">Select CSS</option>
+          <select className='border rounded-md px-3 py-2 w-full' value={css} onChange={(e) => setCss(e.target.value)} required>
+            <option value="">Select Css</option>
             {cssPackages.map((name) => (
               <option key={name} value={name}>
                 {name}
               </option>
             ))}
           </select>
-          {errors.css && <p className="text-red-600">{errors.css}</p>}
-        </div>
-        <div>
-          <select className='border rounded-md px-3 py-2 w-full' value={useCase} onChange={(e) => setUseCase(e.target.value)}>
-            <option value="">Select A Use Case</option>
+          <select className='border rounded-md px-3 py-2 w-full' value={useCase} onChange={(e) => setUseCase(e.target.value)} required>
+            <option value="">Select A UseCase</option>
             {useCases.map((name) => (
               <option key={name} value={name}>
                 {name}
               </option>
             ))}
           </select>
-          {errors.useCase && <p className="text-red-600">{errors.useCase}</p>}
         </div>
-      </div>
 
-      <div className="grid grid-cols gap-4">
-        <Input type='url' placeholder='Deployed Link' value={deployedLink} onChange={(e) => setDeployedLink(e.target.value)} />
-        {errors.deployedLink && <p className="text-red-600">{errors.deployedLink}</p>}
+        <div className="grid grid-cols-2 gap-4">
+          <Input type='url' placeholder='Deployed Link' value={deployedLink} onChange={(e) => setDeployedLink(e.target.value)} required />
+          <Input type='url' placeholder='Repository Link' value={repositoryLink} onChange={(e) => setRepositoryLink(e.target.value)} required />
         </div>
-        <div className="grid grid-cols gap-4">
-        <Input type='url' placeholder='Repository Link' value={repositoryLink} onChange={(e) => setRepositoryLink(e.target.value)} />
-        {errors.repositoryLink && <p className="text-red-600">{errors.repositoryLink}</p>}
-      </div>
 
-      <div className="grid w-full items-center gap-2">
-        <Label>Template Images</Label>
-        <Input type='file' multiple onChange={uploadImages} />
-        {isUploading && (
-          <div className="">
-            <Spinner />
-          </div>
-        )}
+        <div className="grid w-full items-center gap-2">
+          <Label>Template Images</Label>
+          <Input type='file' onChange={uploadImages} required />
+          {isUploading && (
+            <div className="">
+              <Spinner />
+            </div>
+          )}
 
-        {!isUploading && (
-          <div className="w-full">
-            <ReactSortable
-              list={Array.isArray(images) ? images : []}
-              setList={updateImagesOrder}
-              className='grid grid-cols-3 gap-4'
-            >
-              {Array.isArray(images) && images.map((link, index) => (
-                <div className="relative" key={link}>
-                  <img src={link} alt="template image" className="object-cover h-full w-full rounded-md border p-2 cursor-pointer transition-transform duration-300 transform-gpu group-hover:scale-110" />
-                  <div className="absolute top-3 right-3 cursor-pointer opacity-100">
-                    <Button onClick={() => handleDeleteImage(index)}>
-                      <Trash className='w-4 h-4 bg-white text-red-600 rounded-full p-1' />
-                    </Button>
+          {!isUploading && (
+            <div className="w-full">
+              <ReactSortable
+                list={Array.isArray(images) ? images : []}
+                setList={updateImagesOrder}
+                className='grid grid-cols-3 gap-4'
+              >
+                {Array.isArray(images) && images.map((link, index) => (
+                  <div className="relative" key={link}>
+                    <img src={link} alt="template image" className="object-cover h-full w-full rounded-md border p-2 cursor-pointer transition-transform duration-300 transform-gpu group-hover:scale-110" />
+                    <div className="absolute top-3 right-3 cursor-pointer opacity-100">
+                      <Button onClick={() => handleDeleteImage(index)}>
+                        <Trash className='w-4 h-4 bg-white text-red-600 rounded-full p-1' />
+                      </Button>
+                    </div>
                   </div>
-                </div>
-              ))}
-            </ReactSortable>
-          </div>
-        )}
-      </div>
+                ))}
+              </ReactSortable>
+            </div>
+          )}
+        </div>
 
-      <div>
-        <ReactQuill theme='snow' modules={modules} formats={formats} placeholder='Describe your template' className='flex-grow my-3 h-auto' value={description} onChange={(newValue) => setDescription(newValue)} />
-        {errors.description && <p className="text-red-600">{errors.description}</p>}
-      </div>
+        <ReactQuill
+          theme='snow'
+          modules={modules}
+          formats={formats}
+          placeholder='Describe your template'
+          className='flex-grow my-3 h-auto'
+          value={description}
+          onChange={(newValue) => {
+            setDescription(newValue);
+            if (newValue.trim() !== '') {
+              setDescriptionError('');
+            }
+          }}
+        />
+        {descriptionError && <p className="text-red-600">{descriptionError}</p>}
 
-      <Button>
-        {_id ? 'Update Template' : 'Create Template'}
-      </Button>
-    </form>
+        <Button>
+          {_id ? 'Update Template' : 'Create Template'}
+        </Button>
+      </form>
+    </>
   );
 };
 
