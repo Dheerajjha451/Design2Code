@@ -95,14 +95,19 @@ const TemplateForm = ({
     const files = Array.from(ev.target.files);
     if (files.length > 0) {
       setIsUploading(true);
-
-      const uploadPromises = files.map(file => compressAndUploadImage(file));
-      const links = await Promise.all(uploadPromises);
-
-      setImages(oldImages => [...oldImages, ...links.flat()]);
-      setIsUploading(false);
+      try {
+        const uploadPromises = files.map(file => compressAndUploadImage(file));
+        const links = await Promise.all(uploadPromises);
+  
+        setImages(oldImages => [...oldImages, ...links.flat()]);
+        setIsUploading(false);
+      } catch (error) {
+        console.error('Error uploading images:', error);
+        setIsUploading(false);
+      }
     }
   }
+  
 
   function validateForm() {
     const newErrors = {};
