@@ -11,6 +11,8 @@ import { useSession } from 'next-auth/react';
 import { useRouter } from 'next/router';
 import Spinner from '../Spinner';
 import { ReactSortable } from 'react-sortablejs';
+import LazyLoad from 'react-lazyload';
+import pica from 'pica';
 
 const ReactQuill = dynamic(() => import('react-quill'), { ssr: false });
 
@@ -69,12 +71,33 @@ const TemplateForm = ({
     setImages(updatedImages);
   }
 
+  async function resizeImage(file) {
+    const img = document.createElement('img');
+    img.src = URL.createObjectURL(file);
+    await img.decode();
+
+    const canvas = document.createElement('canvas');
+    const picaInstance = pica();
+    const resizedCanvas = await picaInstance.resize(img, canvas, {
+      width: 800,
+      height: 600,
+    });
+
+    return new Promise((resolve) => {
+      resizedCanvas.toBlob((blob) => {
+        resolve(new File([blob], file.name, { type: file.type }));
+      });
+    });
+  }
+
   async function uploadImages(ev) {
     const files = ev.target?.files;
     if (files.length > 0) {
       setIsUploading(true);
 
-      for (const file of files) {
+      const resizedFiles = await Promise.all([...files].map(resizeImage));
+
+      for (const file of resizedFiles) {
         const data = new FormData();
         data.append('file', file);
 
@@ -182,7 +205,9 @@ const TemplateForm = ({
               >
                 {Array.isArray(images) && images.map((link, index) => (
                   <div className="relative" key={link}>
-                    <img src={link} alt="template image" className="object-cover h-full w-full rounded-md border p-2 cursor-pointer transition-transform duration-300 transform-gpu group-hover:scale-110" />
+                    <LazyLoad height={200} offset={100}>
+                      <img src={link} alt="template image" className="object-cover h-full w-full rounded-md border p-2 cursor-pointer transition-transform duration-300 transform-gpu group-hover:scale-110" />
+                    </LazyLoad>
                     <div className="absolute top-3 right-3 cursor-pointer opacity-100">
                       <Button onClick={() => handleDeleteImage(index)}>
                         <Trash className='w-4 h-4 bg-white text-red-600 rounded-full p-1' />
