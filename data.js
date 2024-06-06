@@ -6,8 +6,18 @@ export const webFrameworkNames = [
   'Python',
   'Angular',
   'Nuxt',
-  'Other'
-
+  'Other',
+  'Gatsby',
+  'Ember.js',
+  'Backbone.js',
+  'Laravel',
+  'Django',
+  'Flask',
+  'Ruby on Rails',
+  'ASP.NET',
+  'Express.js',
+  'Meteor',
+   'Other'
 ];
 
 export const cssPackages = [
@@ -22,7 +32,18 @@ export const cssPackages = [
   'UIKit',
   'Skeleton',
   'Styled Components',
-  'Others'
+  'Others',
+  'LESS',
+  'Sass',
+  'PostCSS',
+  'Tachyons',
+  'Milligram',
+  'Pure CSS',
+  'Stylus',
+  'CSS Modules',
+  'Emotion',
+  'Radium',
+   'Other'
 ];
 
 export const useCases = [
@@ -43,4 +64,15 @@ export const useCases = [
   'Real-time Apps',
   'SaaS',
   'Virtual Events',
+  'Business Websites',
+  'News Websites',
+  'Personal Blogs',
+  'Forums',
+  'Learning Management Systems (LMS)',
+  'Social Media Platforms',
+  'Job Boards',
+  'Q&A Websites',
+  'Crowdfunding Platforms',
+  'Streaming Services',
+  'Other'
 ];

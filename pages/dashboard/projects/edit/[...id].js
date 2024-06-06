@@ -19,11 +19,13 @@ const EditTemplate = () => {
   }, [id]);
 
   return <>
+   <div className=' max-w-[1440px] mx-auto'>
     <DashboardLayout>
       {templateInfo && (
         <TemplateForm {...templateInfo} />
       )}
     </DashboardLayout>
+    </div>
   </>
 }
 

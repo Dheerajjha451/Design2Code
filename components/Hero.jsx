@@ -5,7 +5,7 @@ import { useSession } from 'next-auth/react';
 const Hero = () => {
   const { data: session } = useSession();
   return <>
-    <div className="relative overflow-hidden">
+    <div className="relative overflow-hidden max-w-[1440px] mx-auto">
       <div className="pb-16 pt-20 sm:pt-24 lg:pb-24 lg:pt-24">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center">

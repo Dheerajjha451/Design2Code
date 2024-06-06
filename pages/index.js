@@ -68,7 +68,7 @@ export default function Home() {
           />
         </div>
       </div>
-      <div className="hidden md:flex items-center space-x-8 mt-12">
+      <div className="md:flex items-center space-x-8 mt-12">
           {session ? (
             <>
               <Link href={'/projects'} className='flex items-center text-primary '>
@@ -88,6 +88,8 @@ export default function Home() {
   </MaxWidthWrapper>
 </section>
 
+
     </div>
+    
   )
 }

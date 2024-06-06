@@ -4,9 +4,11 @@ import React from 'react'
 
 const NewTemplate = () => {
   return <>
+   <div className=' max-w-[1440px] mx-auto'>
   <DashboardLayout>
     <TemplateForm />
   </DashboardLayout>
+  </div>
   </>
 }
 

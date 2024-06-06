@@ -15,8 +15,8 @@ const Header = () => {
   }
 
   return (
-    <nav className="border-b border-gray-200 sticky top-0 z-50 bg-white">
-      <div className="flex flex-wrap items-center justify-between mx-auto p-4">
+    <nav className="border-b border-gray-200 sticky top-0 z-50 bg-white ">
+      <div className="flex flex-wrap items-center justify-between mx-auto p-4 max-w-[1440px] mx-auto">
         <Link href={'/'} className='flex items-center space-x-3 text-primary font-bold'>
           <img src='/Designer.png' width={32} height={32} alt="Logo" />
           <span className="self-center text-2xl font-semibold whitespace-nowrap">

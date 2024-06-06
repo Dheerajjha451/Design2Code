@@ -27,7 +27,7 @@ const Templates = () => {
 
   return (
     <>
-      <header className="border-b mb-3">
+      <header className="border-b mb-3 max-w-[1440px] mx-auto">
         <div className="mx-auto px-4 py-4 sm:px-6 lg:px-8">
           <div className="flex flex-wrap items-center justify-between gap-4 sm:gap-6 lg:gap-8">
             <div className="text-center sm:text-left">
@@ -48,7 +48,7 @@ const Templates = () => {
       </header>
 
       {loading && templates.length === 0 && (
-        <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-4 lg:gap-8">
+        <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-4 lg:gap-8 ">
           {[...Array(8)].map((_, index) => (
             <div className="flex flex-col space-y-3" key={index}>
               <Skeleton className="h-[125px] w-full rounded-xl" />
@@ -61,7 +61,7 @@ const Templates = () => {
         </div>
       )}
 
-      <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-4 lg:gap-8">
+      <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-4 lg:gap-8 max-w-[1440px] mx-auto">
         {filterTemplates.map((template) => (
           <TemplateItem key={template.id} template={template} />
         ))}

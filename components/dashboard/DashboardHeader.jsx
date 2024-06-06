@@ -37,7 +37,7 @@ const DashboardHeader = () => {
         </button>
       </div>
 
-      <aside className={`fixed z-40 w-80 h-full bg-gray-50 transition-transform ${isSidebarOpen ? 'translate-x-0' : '-translate-x-full'} sm:translate-x-0`}>
+      <aside className={`fixed z-40 w-80 h-100 bg-gray-50 transition-transform ${isSidebarOpen ? 'translate-x-0' : '-translate-x-full'} sm:translate-x-0`}>
         <div className="h-full px-3 py-4 overflow-y-auto relative">
           <button
             className="absolute top-4 right-4 text-gray-500 hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-gray-200 rounded-lg p-2 sm:hidden"
