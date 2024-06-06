@@ -3,8 +3,9 @@ import MaxWidthWrapper from '@/components/MaxWidthWrapper'
 import { Button, buttonVariants } from '@/components/ui/button'
 import { ArrowRight, Check, Star } from 'lucide-react'
 import Link from 'next/link'
-
+import { useSession } from 'next-auth/react'
 export default function Home() {  
+  const { data: session } = useSession()
   return (
     <div className=''>
       <section className="relative pb-24 pt-10 sm:pb-32 xl:pb-52 xl:pt-32 lg:pt-24">
@@ -67,10 +68,26 @@ export default function Home() {
           />
         </div>
       </div>
-    
+      <div className="hidden md:flex items-center space-x-8 mt-12">
+          {session ? (
+            <>
+              <Link href={'/projects'} className='flex items-center text-primary '>
+                <Button variant='default' className="text-xl font-semibold whitespace-nowrap ">
+                  Start now
+                </Button>
+              </Link>
+            
+            </>
+          ) : (
+            <Button variant='default' onClick={() => { window.location.href = '/login' }}>
+            Start now
+            </Button>
+          )}
+        </div>
     </div>
   </MaxWidthWrapper>
 </section>
+
     </div>
   )
 }
