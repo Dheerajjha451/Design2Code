@@ -17,7 +17,7 @@ const DashboardHeader = () => {
     <>
       <div className="flex justify-between items-center p-4  shadow-sm">
         <button
-          className="inline-flex items-center p-2 text-gray-500 rounded-lg sm:hidden hover:bg-gray-200 dark:bg-slate-800 hover:dark:bg-slate-900 focus:outline-none focus:ring-2 "
+          className="inline-flex items-center p-2 text-gray-500 rounded-lg sm:hidden hover:bg-gray-200 dark:bg-slate-800 hover:dark:bg-slate-600 focus:outline-none focus:ring-2 "
           onClick={() => setIsSidebarOpen(!isSidebarOpen)}
         >
           <span className="sr-only">Open sidebar</span>
@@ -65,10 +65,10 @@ const DashboardHeader = () => {
                   <img src={session?.user?.image} alt={session?.user?.name} className='w-24 h-24 mb-3 rounded-full shadow-lg' />
                   <h5 className="mb-1 text-xl font-medium text-gray-900 dark:text-white">{session?.user?.name}</h5>
                   <span className="text-sm text-gray-600 dark:text-white">{session?.user?.email}</span>
-                  <Button variant='outline' className='w-full mt-2' onClick={() => { window.location.href = '/dashboard' }}>
+                  <Button variant='outline' className='w-full mt-2  dark:hover:bg-slate-900' onClick={() => { window.location.href = '/dashboard' }}>
                     Dashboard
                   </Button>
-                  <Button variant='outline' onClick={logout} className='w-full mt-2'>
+                  <Button variant='outline' onClick={logout} className='w-full mt-2 dark:hover:bg-slate-900'>
                     Logout
                   </Button>
                 </div>
