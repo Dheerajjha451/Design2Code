@@ -42,7 +42,7 @@ const TemplatePage = () => {
       <section className="pb-24 pt-6">
         <div className="grid grid-cols-1 gap-x-8 gap-y-10 lg:grid-cols-3">
           <div className="lg:col-span-1 lg:fixed top-36 lg:block w-full lg:w-auto">
-            <Link href={'/projects'} className='flex text-md items-center mb-3 text-gray-500 font-bold'>
+            <Link href={'/projects'} className='flex text-md items-center mb-3 text-gray-500 font-bold dark:text-white'>
               <MoveLeft className='mr-2' />
               Go back
             </Link>
@@ -50,24 +50,24 @@ const TemplatePage = () => {
               <Avatar className='my-4' size='large'>
                 <AvatarImage src={templateInfo?.user.image} alt={templateInfo?.user.name} />
               </Avatar>
-              <h1 className="text-xl font-bold text-gray-700">
+              <h1 className="text-xl font-bold text-gray-700 dark:text-white">
                 {templateInfo?.user.name}
               </h1>
             </Badge>
             <h2 className="text-2xl font-semibold my-6">
               {templateInfo?.title}
             </h2>
-            <div className="border-b p-3 text-gray-500 text-md flex justify-between">
+            <div className="border-b p-3 text-gray-500 text-md flex justify-between dark:text-white">
               <p className="text-md font-medium">Framework</p>
-              <p className="text-md text-gray-600">{templateInfo?.framework}</p>
+              <p className="text-md text-gray-600 dark:text-white">{templateInfo?.framework}</p>
             </div>
-            <div className="border-b p-3 text-gray-500 text-md flex justify-between">
+            <div className="border-b p-3 text-gray-500 text-md flex justify-between dark:text-white">
               <p className="text-md font-medium">Use Case</p>
-              <p className="text-md text-gray-600">{templateInfo?.useCase}</p>
+              <p className="text-md text-gray-600 dark:text-white">{templateInfo?.useCase}</p>
             </div>
-            <div className="border-b p-3 text-gray-500 text-md flex justify-between">
+            <div className="border-b p-3 text-gray-500 text-md flex justify-between dark:text-white">
               <p className="text-md font-medium">Css </p>
-              <p className="text-md text-gray-600">{templateInfo?.css}</p>
+              <p className="text-md text-gray-600 dark:text-white" >{templateInfo?.css}</p>
             </div>
             <div className="flex flex-col sm:flex-row gap-3 justify-center text-center mt-6">
               <a href={templateInfo?.repositoryLink} target='_blank' style={{ width: "100%" }} className='sm:w-40'>
