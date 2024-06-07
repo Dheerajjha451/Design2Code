@@ -1,5 +1,5 @@
 import { mongooseConnect } from "@/lib/mongoose";
-import { Template } from "@/models/Template";
+import { Template } from "@/models/Template.model";
 
 export default async function handle(req, res) {
   const { method } = req;

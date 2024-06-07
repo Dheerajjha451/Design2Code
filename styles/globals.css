@@ -66,6 +66,83 @@
   }
 }
 
+:root {
+  --quill-toolbar-background-dark: #2d3748;
+  --quill-toolbar-icon-color-dark: #cbd5e0;
+  --quill-toolbar-border-color-dark: #4a5568;
+  --quill-tooltip-background-dark: #ffffff;
+  --quill-tooltip-text-color-dark: #ffffff;
+  --quill-placeholder-color-dark: #ffffff;
+}
+
+.dark .ql-toolbar {
+  background-color: var(--quill-toolbar-background-dark) !important;
+  border: 1px solid var(--quill-toolbar-border-color-dark) !important;
+}
+
+.dark .ql-toolbar .ql-formats button,
+.dark .ql-toolbar .ql-picker-label,
+.dark .ql-toolbar .ql-picker-item {
+  color: var(--quill-toolbar-icon-color-dark) !important;
+}
+
+.dark .ql-toolbar .ql-stroke {
+  stroke: var(--quill-toolbar-icon-color-dark) !important;
+}
+
+.dark .ql-toolbar .ql-fill {
+  fill: var(--quill-toolbar-icon-color-dark) !important;
+}
+
+.dark .ql-tooltip {
+  background-color: var(--quill-tooltip-background-dark) !important;
+  color: var(--quill-tooltip-text-color-dark) !important;
+}
+
+.dark .ql-tooltip a {
+  color: var(--quill-tooltip-text-color-dark) !important;
+}
+
+.dark .ql-editor {
+  background-color: #1a202c !important;
+  color: #ffffff !important;
+}
+
+.dark .ql-container {
+  background-color: #ffffff !important;
+}
+
+.dark .ql-editor::before {
+  color: var(--quill-placeholder-color-dark) !important;
+  opacity: 1 !important; 
+}
+
+.dark select,
+.dark option {
+  background-color: #2d3748 !important;
+  color: #e2e8f0 !important;
+}
+
+.dark input {
+  background-color: #2d3748 !important;
+  color: #ffffff !important;
+  border: 1px solid #4a5568 !important;
+}
+
+.dark label {
+  color: #ffffff !important;
+}
+
+.dark .button {
+  background-color: #2d3748 !important;
+  color: #e2e8f0 !important;
+  border: 1px solid #4a5568 !important;
+}
+
+.dark ::placeholder {
+  color: #ffffff !important;
+}
+
 @layer base {
   * {
     @apply border-border;

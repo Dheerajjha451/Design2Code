@@ -1,22 +1,43 @@
 import Link from 'next/link'
-import React, { useState } from 'react'
-import { Code, SquareDashedBottomCode } from 'lucide-react'
+import React, { useState, useEffect } from 'react'
+import { Code, SquareDashedBottomCode, Sun, Moon, Menu, X } from 'lucide-react'
 import { Button } from './ui/button'
 import { useSession } from 'next-auth/react'
 import { Avatar, AvatarImage } from './ui/avatar'
-import { Menu, X } from 'lucide-react' 
 
 const Header = () => {
   const { data: session } = useSession()
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
+  const [isDarkMode, setIsDarkMode] = useState(false)
+
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      const savedTheme = localStorage.getItem('theme')
+      if (savedTheme) {
+        setIsDarkMode(savedTheme === 'dark')
+        document.documentElement.classList.toggle('dark', savedTheme === 'dark')
+      } else {
+        const prefersDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches
+        setIsDarkMode(prefersDarkMode)
+        document.documentElement.classList.toggle('dark', prefersDarkMode)
+      }
+    }
+  }, [])
 
   const handleToggle = () => {
     setIsMobileMenuOpen(!isMobileMenuOpen)
   }
 
+  const handleThemeToggle = () => {
+    const newTheme = isDarkMode ? 'light' : 'dark'
+    setIsDarkMode(!isDarkMode)
+    document.documentElement.classList.toggle('dark', newTheme === 'dark')
+    localStorage.setItem('theme', newTheme)
+  }
+
   return (
-    <nav className="border-b border-gray-200 sticky top-0 z-50 bg-white ">
-      <div className="flex flex-wrap items-center justify-between mx-auto p-4 max-w-[1440px] mx-auto">
+    <nav className="border-b border-gray-200 sticky top-0 z-50 bg-white dark:bg-gradient-to-r from-black via-gray-800 to-black dark:border-zinc-700">
+      <div className="flex flex-wrap items-center justify-between p-4 max-w-[1440px] mx-auto">
         <Link href={'/'} className='flex items-center space-x-3 text-primary font-bold'>
           <img src='/Designer.png' width={32} height={32} alt="Logo" />
           <span className="self-center text-2xl font-semibold whitespace-nowrap">
@@ -31,6 +52,9 @@ const Header = () => {
         </div>
 
         <div className="hidden md:flex items-center space-x-8">
+          <button onClick={handleThemeToggle} className="text-primary">
+            {isDarkMode ? <Sun size={24} /> : <Moon size={24} />}
+          </button>
           {session ? (
             <>
               <Link href={'/projects'} className='flex items-center text-primary font-bold space-x-2'>
@@ -53,6 +77,9 @@ const Header = () => {
         {/* Mobile Menu */}
         {isMobileMenuOpen && (
           <div className="w-full md:hidden flex flex-col items-start space-y-4 mt-4">
+            <button onClick={handleThemeToggle} className="text-primary">
+              {isDarkMode ? <Sun size={24} /> : <Moon size={24} />}
+            </button>
             {session ? (
               <>
                 <Link href={'/projects'} className='flex items-center text-primary font-bold space-x-2'>

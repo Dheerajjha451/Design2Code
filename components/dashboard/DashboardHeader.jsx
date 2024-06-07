@@ -15,9 +15,9 @@ const DashboardHeader = () => {
 
   return (
     <>
-      <div className="flex justify-between items-center p-4 bg-gray-100 shadow-sm">
+      <div className="flex justify-between items-center p-4  shadow-sm">
         <button
-          className="inline-flex items-center p-2 text-gray-500 rounded-lg sm:hidden hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-gray-200"
+          className="inline-flex items-center p-2 text-gray-500 rounded-lg sm:hidden hover:bg-gray-200 dark:bg-slate-800 hover:dark:bg-slate-900 focus:outline-none focus:ring-2 "
           onClick={() => setIsSidebarOpen(!isSidebarOpen)}
         >
           <span className="sr-only">Open sidebar</span>
@@ -37,7 +37,7 @@ const DashboardHeader = () => {
         </button>
       </div>
 
-      <aside className={`fixed z-40 w-80 h-100 bg-gray-50 transition-transform ${isSidebarOpen ? 'translate-x-0' : '-translate-x-full'} sm:translate-x-0`}>
+      <aside className={`fixed z-40 w-80 h-100 transition-transform ${isSidebarOpen ? 'translate-x-0' : '-translate-x-full'} sm:translate-x-0`}>
         <div className="h-full px-3 py-4 overflow-y-auto relative">
           <button
             className="absolute top-4 right-4 text-gray-500 hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-gray-200 rounded-lg p-2 sm:hidden"
@@ -60,11 +60,11 @@ const DashboardHeader = () => {
           </button>
           <ul className="space-y-2 font-medium mt-8">
             <li>
-              <div className="w-full max-w-sm bg-white border border-gray-200 rounded-lg shadow">
+              <div className="w-full max-w-sm bg-white border border-gray-200 dark:bg-slate-800 dark:border-gray-800 rounded-lg shadow">
                 <div className="flex flex-col items-center p-3">
                   <img src={session?.user?.image} alt={session?.user?.name} className='w-24 h-24 mb-3 rounded-full shadow-lg' />
-                  <h5 className="mb-1 text-xl font-medium text-gray-900">{session?.user?.name}</h5>
-                  <span className="text-sm text-gray-600">{session?.user?.email}</span>
+                  <h5 className="mb-1 text-xl font-medium text-gray-900 dark:text-white">{session?.user?.name}</h5>
+                  <span className="text-sm text-gray-600 dark:text-white">{session?.user?.email}</span>
                   <Button variant='outline' className='w-full mt-2' onClick={() => { window.location.href = '/dashboard' }}>
                     Dashboard
                   </Button>

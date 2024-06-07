@@ -61,7 +61,7 @@ const DashboardContent = () => {
 
   return (
     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-      <Card className='w-full h-auto bg-gray-100 cursor-pointer mb-3 hover:bg-white' onClick={() => { window.location.href = '/dashboard/projects/new' }}>
+      <Card className='w-full h-auto bg-gray-100  dark:bg-slate-800 hover:dark:bg-slate-900  cursor-pointer mb-3 hover:bg-white' onClick={() => { window.location.href = '/dashboard/projects/new' }}>
         <CardContent className='flex flex-col items-center justify-center mt-2 text-center h-full'>
           <CirclePlus className='w-12 h-12 mb-2' />
           <h1>New Template</h1>
@@ -69,7 +69,7 @@ const DashboardContent = () => {
       </Card>
 
       {[...templates].reverse().map(template => (
-        <Card key={template._id} className='bg-white w-full mb-3'>
+        <Card key={template._id} className='bg-white w-full mb-3 dark:bg-slate-800 hover:dark:bg-slate-900 '>
           <CardHeader>
             <CardTitle className='truncate text-clamp-1'>
               {template.title}

@@ -210,7 +210,7 @@ const TemplateForm = ({
                     </LazyLoad>
                     <div className="absolute top-3 right-3 cursor-pointer opacity-100">
                       <Button onClick={() => handleDeleteImage(index)}>
-                        <Trash className='w-4 h-4 bg-white text-red-600 rounded-full p-1' />
+                        <Trash className='w-6 h-6 text-red-600 rounded-full p-1' />
                       </Button>
                     </div>
                   </div>
