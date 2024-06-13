@@ -1,6 +1,6 @@
 import { mongooseConnect } from "@/lib/mongoose";
 import cloudinary from "cloudinary";
-import multipary from "multiparty";
+import multiparty from "multiparty";
 
 cloudinary.v2.config({
   cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
@@ -11,7 +11,7 @@ cloudinary.v2.config({
 export default async function handle(req, res) {
   await mongooseConnect();
 
-  const form = new multipary.Form();
+  const form = new multiparty.Form();
 
   const { fields, files } = await new Promise((resolve, reject) => {
     form.parse(req, (err, fields, files) => {
@@ -25,9 +25,11 @@ export default async function handle(req, res) {
       folder: "design2code",
       public_id: `file_${Date.now()}`,
       resource_type: "auto",
+      format: "webp",  
       transformation: [
-        { width: 800, height: 600, crop: "limit" },
-        { quality: "auto" }
+        { width: 800, height: 600, crop: "limit" },  
+        { quality: "auto:good" },  
+        { fetch_format: "auto" },  
       ]
     });
   });
@@ -45,4 +47,4 @@ export const config = {
   api: {
     bodyParser: false
   }
-}
+};

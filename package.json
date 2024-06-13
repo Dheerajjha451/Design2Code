@@ -30,6 +30,7 @@
     "multiparty": "^4.2.3",
     "next": "14.2.3",
     "next-auth": "^4.24.7",
+    "node-cache": "^5.1.2",
     "pica": "^9.0.1",
     "prop-types": "^15.8.1",
     "react": "^18",

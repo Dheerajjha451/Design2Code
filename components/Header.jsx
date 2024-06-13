@@ -39,7 +39,7 @@ const Header = () => {
     <nav className="border-b border-gray-200 sticky top-0 z-50 bg-white dark:bg-gradient-to-r from-black via-gray-800 to-black dark:border-zinc-700">
       <div className="flex flex-wrap items-center justify-between p-4 max-w-[1440px] mx-auto">
         <Link href={'/'} className='flex items-center space-x-3 text-primary font-bold'>
-          <img src='/Designer.png' width={32} height={32} alt="Logo" />
+          <img src='/logo.png' width={32} height={32} alt="Logo" />
           <span className="self-center text-2xl font-semibold whitespace-nowrap">
             Design2Code
           </span>
