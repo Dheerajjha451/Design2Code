@@ -110,7 +110,7 @@ const TemplateItem = React.memo(({ template }) => {
             loading="lazy"
           />
           <div className="">
-            <h3 className="text-base font-semibold leading-7 tracking-tight">
+            <h3 className="text-base font-semibold leading-7 tracking-tight text-gray-600 dark:text-white">
               {template.user.name}
             </h3>
           </div>
@@ -121,7 +121,7 @@ const TemplateItem = React.memo(({ template }) => {
           </h3>
         </div>
       </Link>
-      <div className="absolute bottom-0 left-0 w-full border-t p-3 text-gray-500 dark:text-white text-sm">
+      <div className="absolute bottom-0 left-0 w-full border-t p-3 text-gray-600 dark:text-white text-sm">
         <div className="flex justify-between items-center">
           <p className="text-sm">{template.framework}</p>
           <Link href={template.deployedLink} target="_blank">
