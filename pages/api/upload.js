@@ -25,7 +25,6 @@ export default async function handle(req, res) {
       folder: "design2code",
       public_id: `file_${Date.now()}`,
       resource_type: "auto",
-      format: "webp",  
       transformation: [
         { width: 800, height: 600, crop: "limit" },  
         { quality: "auto:good" },  
