@@ -4,6 +4,7 @@ import { Button, buttonVariants } from '@/components/ui/button'
 import { ArrowRight, Check, Star } from 'lucide-react'
 import Link from 'next/link'
 import { useSession } from 'next-auth/react'
+// import Image from 'next/image'
 
 export default function Home() {  
   const { data: session } = useSession()
@@ -40,35 +41,7 @@ export default function Home() {
               </div>
             </ul>
           
-            <div className="mt-12 flex flex-col sm:flex-row items-center sm:items-start gap-5">
-              <div className="flex -space-x-4">
-                <img
-                  className="inline-block h-10 w-10 rounded-full ring-2 ring-slate-100 dark:ring-gray-700"
-                  src="/users/user-1.png"
-                  alt="user image"
-                />
-                <img
-                  className="inline-block h-10 w-10 rounded-full ring-2 ring-slate-100 dark:ring-gray-700"
-                  src="/users/user-2.png"
-                  alt="user image"
-                />
-                <img
-                  className="inline-block h-10 w-10 rounded-full ring-2 ring-slate-100 dark:ring-gray-700"
-                  src="/users/user-3.png"
-                  alt="user image"
-                />
-                <img
-                  className="inline-block h-10 w-10 rounded-full ring-2 ring-slate-100 dark:ring-gray-700"
-                  src="/users/user-4.jpg"
-                  alt="user image"
-                />
-                <img
-                  className="inline-block object-cover h-10 w-10 rounded-full ring-2 ring-slate-100 dark:ring-gray-700"
-                  src="/users/user-5.jpg"
-                  alt="user image"
-                />
-              </div>
-            </div>
+            
             <div className="md:flex items-center space-x-8 mt-12">
               {session ? (
                 <>
@@ -85,13 +58,15 @@ export default function Home() {
               )}
             </div>
             <div className="mt-12">
-              <a href="https://www.producthunt.com/posts/design2code?embed=true&utm_source=badge-featured&utm_medium=badge&utm_souce=badge-design2code" target="_blank">
+              <Link href="https://www.producthunt.com/posts/design2code?embed=true&utm_source=badge-featured&utm_medium=badge&utm_souce=badge-design2code" target="_blank">
                 <img src="https://api.producthunt.com/widgets/embed-image/v1/featured.svg?post_id=462353&theme=light" alt="Design2Code - Your&#0032;Hub&#0032;for&#0032;free&#0032;Project&#0032;Templates | Product Hunt" style={{ width: '250px', height: '54px' }} width="250" height="54" />
-              </a>
+              </Link>
             </div>
           </div>
         </MaxWidthWrapper>
       </section>
+      
     </div>
   )
 }
+

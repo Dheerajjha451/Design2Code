@@ -44,6 +44,7 @@ const Header = () => {
             Design2Code
           </span>
         </Link>
+   
 
         <div className="flex items-center md:hidden">
           <button onClick={handleToggle} className="text-primary">
@@ -55,14 +56,15 @@ const Header = () => {
           <button onClick={handleThemeToggle} className="text-primary">
             {isDarkMode ? <Sun size={24} /> : <Moon size={24} />}
           </button>
-          {session ? (
-            <>
-              <Link href={'/projects'} className='flex items-center text-primary font-bold space-x-2'>
+          <Link href={'/projects'} className='flex items-center text-primary font-bold space-x-2'>
                 <SquareDashedBottomCode width={20} height={20} />
                 <span className="text-xl font-semibold whitespace-nowrap">
                   Projects
                 </span>
               </Link>
+          {session ? (
+            <>
+             
               <Avatar onClick={() => { window.location.href = '/dashboard' }} className="cursor-pointer">
                 <AvatarImage src={session.user.image} />
               </Avatar>
