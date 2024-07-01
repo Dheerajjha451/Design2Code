@@ -1,6 +1,6 @@
 import MaxWidthWrapper from '@/components/MaxWidthWrapper'
 import { Button} from '@/components/ui/button'
-import { ArrowRight, Check} from 'lucide-react'
+import { Check} from 'lucide-react'
 import Link from 'next/link'
 import { useSession } from 'next-auth/react'
 
