@@ -25,6 +25,11 @@ const Footer = () => {
           >
             Feedback
           </p>
+          <div className="space-x-2">
+              <Link href="https://www.producthunt.com/posts/design2code?embed=true&utm_source=badge-featured&utm_medium=badge&utm_souce=badge-design2code" target="_blank">
+                <img src="https://api.producthunt.com/widgets/embed-image/v1/featured.svg?post_id=462353&theme=light" alt="Design2Code - Your&#0032;Hub&#0032;for&#0032;free&#0032;Project&#0032;Templates | Product Hunt" style={{ width: '250px', height: '54px' }} width="250" height="54" />
+              </Link>
+            </div>
         </div>
       </div>
     </footer>

@@ -13,9 +13,12 @@ export default async function handle(req, res) {
 
   const form = new multiparty.Form();
 
-  const { fields, files } = await new Promise((resolve, reject) => {
+  const { files } = await new Promise((resolve, reject) => {
     form.parse(req, (err, fields, files) => {
-      if (err) reject(err);
+      if (err) {
+        reject(err);
+        return;
+      }
       resolve({ fields, files });
     });
   });
@@ -26,9 +29,9 @@ export default async function handle(req, res) {
       public_id: `file_${Date.now()}`,
       resource_type: "auto",
       transformation: [
-        { width: 800, height: 600, crop: "limit" },  
-        { quality: "auto:good" },  
-        { fetch_format: "auto" },  
+        { width: 800, height: 600, crop: "limit" },
+        { quality: "auto:good" },
+        { fetch_format: "auto" },
       ]
     });
   });
@@ -44,6 +47,6 @@ export default async function handle(req, res) {
 
 export const config = {
   api: {
-    bodyParser: false
-  }
+    bodyParser: false,
+  },
 };

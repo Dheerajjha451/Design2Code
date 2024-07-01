@@ -5,7 +5,7 @@ import { Label } from '../ui/label';
 import dynamic from 'next/dynamic';
 import 'react-quill/dist/quill.snow.css';
 import { Button } from '../ui/button';
-import { FolderPlus, Trash } from 'lucide-react';
+import { Trash } from 'lucide-react';
 import axios from 'axios';
 import { useSession } from 'next-auth/react';
 import { useRouter } from 'next/router';
@@ -92,7 +92,7 @@ const TemplateForm = ({
 
   async function uploadImages(ev) {
     const files = ev.target?.files;
-    if (files.length > 0) {
+    if (files && files.length > 0) {
       setIsUploading(true);
 
       const resizedFiles = await Promise.all([...files].map(resizeImage));
@@ -183,7 +183,7 @@ const TemplateForm = ({
         </div>
 
         <div className="grid grid-cols-2 gap-4">
-          <Input type='url' placeholder='Deployed Link' value={deployedLink} onChange={(e) => setDeployedLink(e.target.value)} required />
+          <Input type='url' placeholder='Deployed Link' value={deployedLink} onChange={(e) => setDeployedLink(e.target.value)} />
           <Input type='url' placeholder='Repository Link' value={repositoryLink} onChange={(e) => setRepositoryLink(e.target.value)} required />
         </div>
 

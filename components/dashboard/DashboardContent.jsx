@@ -8,7 +8,6 @@ import { Button } from '../ui/button';
 
 import {
   AlertDialog,
-  AlertDialogAction,
   AlertDialogCancel,
   AlertDialogContent,
   AlertDialogDescription,

@@ -1,6 +1,6 @@
 import Link from 'next/link'
 import React, { useState, useEffect } from 'react'
-import { Code, SquareDashedBottomCode, Sun, Moon, Menu, X } from 'lucide-react'
+import { SquareDashedBottomCode, Sun, Moon, Menu, X } from 'lucide-react'
 import { Button } from './ui/button'
 import { useSession } from 'next-auth/react'
 import { Avatar, AvatarImage } from './ui/avatar'
@@ -17,9 +17,8 @@ const Header = () => {
         setIsDarkMode(savedTheme === 'dark')
         document.documentElement.classList.toggle('dark', savedTheme === 'dark')
       } else {
-        const prefersDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches
-        setIsDarkMode(prefersDarkMode)
-        document.documentElement.classList.toggle('dark', prefersDarkMode)
+        setIsDarkMode(false)
+        document.documentElement.classList.remove('dark')
       }
     }
   }, [])
@@ -44,7 +43,6 @@ const Header = () => {
             Design2Code
           </span>
         </Link>
-   
 
         <div className="flex items-center md:hidden">
           <button onClick={handleToggle} className="text-primary">
@@ -57,14 +55,13 @@ const Header = () => {
             {isDarkMode ? <Sun size={24} /> : <Moon size={24} />}
           </button>
           <Link href={'/projects'} className='flex items-center text-primary font-bold space-x-2'>
-                <SquareDashedBottomCode width={20} height={20} />
-                <span className="text-xl font-semibold whitespace-nowrap">
-                  Projects
-                </span>
-              </Link>
+            <SquareDashedBottomCode width={20} height={20} />
+            <span className="text-xl font-semibold whitespace-nowrap">
+              Projects
+            </span>
+          </Link>
           {session ? (
             <>
-             
               <Avatar onClick={() => { window.location.href = '/dashboard' }} className="cursor-pointer">
                 <AvatarImage src={session.user.image} />
               </Avatar>

@@ -1,13 +1,12 @@
-import { Icons } from '@/components/Icons'
 import MaxWidthWrapper from '@/components/MaxWidthWrapper'
-import { Button, buttonVariants } from '@/components/ui/button'
-import { ArrowRight, Check, Star } from 'lucide-react'
+import { Button} from '@/components/ui/button'
+import { ArrowRight, Check} from 'lucide-react'
 import Link from 'next/link'
 import { useSession } from 'next-auth/react'
-// import Image from 'next/image'
 
 export default function Home() {  
   const { data: session } = useSession()
+
   return (
     <div className=''>
       <section className="relative pb-24 pt-10 sm:pb-32 xl:pb-52 xl:pt-32 lg:pt-24">
@@ -23,7 +22,24 @@ export default function Home() {
               Share your innovative designs and projects with the world.{' '}
               <span className="font-semibold">Showcase</span> your talent with us.
             </p>
+            
+            <div className="md:flex items-center space-x-8 mt-12">
+              {session ? (
+                <Link href={'/projects'} className='flex items-center text-primary '>
+                  <Button variant='default' className="text-xl font-semibold whitespace-nowrap ">
+                    Start now
+                  </Button>
+                </Link>
+              ) : (
+                <Button variant='default' onClick={() => { window.location.href = '/login' }}>
+                  Start now
+                </Button>
+              )}
+            </div>
 
+            <img src="/Lightui.png" alt="UI image" className="mt-12 shadow-2xl" />
+             
+             
             <ul className="mt-8 space-y-2 text-left font-medium flex flex-col items-center sm:items-center">
               <div className="space-y-2">
                 <li className="flex gap-1.5 items-center text-left">
@@ -40,33 +56,11 @@ export default function Home() {
                 </li>
               </div>
             </ul>
-          
-            
-            <div className="md:flex items-center space-x-8 mt-12">
-              {session ? (
-                <>
-                  <Link href={'/projects'} className='flex items-center text-primary '>
-                    <Button variant='default' className="text-xl font-semibold whitespace-nowrap ">
-                      Start now
-                    </Button>
-                  </Link>
-                </>
-              ) : (
-                <Button variant='default' onClick={() => { window.location.href = '/login' }}>
-                  Start now
-                </Button>
-              )}
-            </div>
-            <div className="mt-12">
-              <Link href="https://www.producthunt.com/posts/design2code?embed=true&utm_source=badge-featured&utm_medium=badge&utm_souce=badge-design2code" target="_blank">
-                <img src="https://api.producthunt.com/widgets/embed-image/v1/featured.svg?post_id=462353&theme=light" alt="Design2Code - Your&#0032;Hub&#0032;for&#0032;free&#0032;Project&#0032;Templates | Product Hunt" style={{ width: '250px', height: '54px' }} width="250" height="54" />
-              </Link>
-            </div>
+
+           
           </div>
         </MaxWidthWrapper>
       </section>
-      
     </div>
   )
 }
-
