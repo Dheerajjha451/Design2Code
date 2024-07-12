@@ -1,6 +1,6 @@
 import MaxWidthWrapper from '@/components/MaxWidthWrapper'
 import { Button} from '@/components/ui/button'
-import { Check} from 'lucide-react'
+import { Check, ExternalLink} from 'lucide-react'
 import Link from 'next/link'
 import { useSession } from 'next-auth/react'
 
@@ -22,7 +22,7 @@ export default function Home() {
               Share your innovative designs and projects with the world.{' '}
               <span className="font-semibold">Showcase</span> your talent with us.
             </p>
-            
+           
             <div className="md:flex items-center space-x-8 mt-12">
               {session ? (
                 <Link href={'/projects'} className='flex items-center text-primary '>
@@ -57,7 +57,14 @@ export default function Home() {
               </div>
             </ul>
 
-           
+           <Button 
+      variant='default' 
+      className="text-sm  whitespace-nowrap mt-8"
+      onClick={() => window.location.href = 'mailto:dheerajjha451@gmail.com'}
+    >
+      <ExternalLink className="mr-2 " />
+      Looking for a freelancer or full time employee
+    </Button>
           </div>
         </MaxWidthWrapper>
       </section>
