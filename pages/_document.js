@@ -29,6 +29,7 @@ export default function Document() {
           content="Design2Code is a platform where developers can share their projects with other developers. Showcase your innovative designs and projects, inspire others, and build your professional portfolio."
         />
         <meta property="twitter:image" content="https://www.design2code.com/logo.png" />
+        <meta name="google-site-verification" content="MOx4PN5L7uXCe9j_UJcGOzzr2jUGwSF7IoBdKIh1feA" />
       </Head>
       <body>
         <Main />
