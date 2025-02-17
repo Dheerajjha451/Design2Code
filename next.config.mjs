@@ -4,13 +4,7 @@ const nextConfig = {
   images: {
     domains: ['res.cloudinary.com']
   },
-  webpack: (config, { dev, isServer }) => {
-    if (isServer) {
-      require("./scripts/generate-sitemap");
-    }
-
-    return config;
-  },
+  trailingSlash: true, 
 };
 
 export default nextConfig;
