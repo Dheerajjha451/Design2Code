@@ -34,6 +34,7 @@ export default function Document() {
      crossorigin="anonymous"></script>
       </Head>
       <body>
+       <script type="module" src="https://www.webannotates.com/webcomment-embed.js?pt=8bd41f9375014bb5b5e3335b0702397b" async></script>
         <Main />
         <NextScript />
       </body>
